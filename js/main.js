@@ -55,7 +55,12 @@ class Conta {
         return this.saldo;
     }
     getExtrato(){
-        extratoTable.innerHTML = ""
+        extratoTable.innerHTML = 
+        "<tr>"+
+            "<th>Transação</th>"+
+            "<th>Valor</th>"+
+            "<th>Horário</th>"+
+        "</tr>"
         if(this.extrato.length != 0){
             this.extrato.forEach(e =>{
                 extratoTable.innerHTML += 
@@ -66,11 +71,13 @@ class Conta {
                     "<td class='"+e.type+"'>"+
                         e.value+
                     "</td>"+
-                    "<td>"+
+                    "<td class='time'>"+
                         e.date+
                     "</td>"+
                 "</tr>"
             })
+        }else{
+            extratoTable.innerHTML = 'Não foram encontradas transações'
         }
     }
     showSaldoOnScreen(){
@@ -97,7 +104,7 @@ realizarSaque = function(){
             var today = new Date();
             var date = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             conta.sacar(quantityInput.value, date)
-            alertText.innerHTML = "Saque de R$"+quantityInput.value+" efetuado! Horário:"+date
+            alertText.innerHTML = "Última transação: saque de R$"+quantityInput.value+" - Horário: "+date
         }catch(e){
             alertText.innerHTML = "<p class='red'>"+e+"</p>"
         }
@@ -109,7 +116,7 @@ realizarDeposito = function(){
             var today = new Date();
             var date = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             conta.depositar(parseFloat(quantityInput.value), date)
-            alertText.innerHTML = "Deposito de R$"+quantityInput.value+" efetuado! Horário:"+date
+            alertText.innerHTML = "Última transação: deposito de R$"+quantityInput.value+" - Horário: "+date
         }catch(e){
             alertText.innerHTML = "<p class='red'>"+e+"</p>"
         }
@@ -117,7 +124,7 @@ realizarDeposito = function(){
 }
 mostrarExtrato = function(){
     if(isMostrarExtrato == false){
-        extratoTable.style.display = "block"
+        extratoTable.style.display = "inline-block"
         isMostrarExtrato = true;
         conta.getExtrato()
         document.getElementById('extrato-button').value = "Esconder extrato"
