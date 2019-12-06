@@ -1,0 +1,12 @@
+body{
+    font-family: 'Comfortaa', cursive;
+}
+.saque, .red{
+    color: red;
+}
+.deposito, .green{
+    color: green;
+}
+.saque::before, .deposito::before{
+    content: "R$"
+}

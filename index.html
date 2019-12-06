@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Raleway&display=swap" rel="stylesheet">
+    
+    <title>Banco</title>
+</head>
+<body>
+    <h1>Bem vindo!</h1>
+    <h3 id="numconta">Conta: </h3>
+    <a id="saldo" onclick="showSaldo()" href="#">Mostrar saldo</a><br>
+    <input type="text" id="value"><br>
+    <input type="button" value="Sacar" id="saque" onclick="realizarSaque();">
+    <input type="button" value="Depositar" id="depositar" onclick="realizarDeposito();"><br>
+    <input type="button" value="Mostrar extrato" id="extrato" onclick="mostrarExtrato();"><br>
+    <p>*Deposito mínimo: R$100,00</p>
+    <span id="alert"></span><br>
+</body>
+<script src="js/main.js"></script>
+</html>
