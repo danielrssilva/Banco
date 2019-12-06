@@ -1,8 +1,11 @@
-console.log("Iniciando")
 quantityInput = document.getElementById('value')
 alertText = document.getElementById('alert')
 saldoLabel =  document.getElementById('saldo')
+extratoTable = document.getElementById('transactions-table')
+
 mostrarSaldo = false
+isMostrarExtrato = false
+
 class Conta { 
     constructor() { 
         this.numero = []; 
@@ -16,19 +19,23 @@ class Conta {
             this.numero.push(Math.floor(Math.random() * (10 - 1)) + 1)
         }
     }
-    sacar(valor){
-        if(valor> (this.saldo + this.limite))
+    sacar(valor, data){
+        if(valor > (this.saldo + this.limite))
             throw("Limite insuficiente!")
         else{
             this.saldo -= valor
             this.showSaldoOnScreen()
             this.extrato.push({
                 type: 'saque',
-                value: valor
+                value: valor,
+                date: data
             })
+            if(isMostrarExtrato){
+                this.getExtrato()
+            }
         }
     }
-    depositar(valor) { 
+    depositar(valor, data) { 
         if(valor < 100)
             throw("Não dá, bobão!")
         else{
@@ -36,23 +43,34 @@ class Conta {
             this.showSaldoOnScreen()
             this.extrato.push({
                 type: 'deposito',
-                value: valor
+                value: valor,
+                date: data
             })
+            if(isMostrarExtrato){
+                this.getExtrato()
+            }
         }
     }
     getSaldo() {
         return this.saldo;
     }
-    mostrarExtrato(){
-        alertText.innerHTML = "";
+    getExtrato(){
+        extratoTable.innerHTML = ""
         if(this.extrato.length != 0){
-            this.extrato.forEach(e => {
-                alertText.innerHTML += "<p class='"+e.type+"'>"+e.value+"</p>"
-            });
-            if(this.getSaldo() > 0)
-                alertText.innerHTML += "<p>Total: <span class='green'>R$"+this.getSaldo()+"</span></p>"
-            else
-                alertText.innerHTML += "<p>Total: <span class='red'>R$"+this.getSaldo()+"</span></p>"
+            this.extrato.forEach(e =>{
+                extratoTable.innerHTML += 
+                "<tr>"+
+                    "<td>"+
+                        e.type+
+                    "</td>"+
+                    "<td class='"+e.type+"'>"+
+                        e.value+
+                    "</td>"+
+                    "<td>"+
+                        e.date+
+                    "</td>"+
+                "</tr>"
+            })
         }
     }
     showSaldoOnScreen(){
@@ -76,24 +94,38 @@ const conta = new ContaPoupanca()
 realizarSaque = function(){
     if(quantityInput.value > 0 || quantityInput.value < 0){
         try{
-            conta.sacar(quantityInput.value)
-            alertText.innerHTML = "Saque de R$"+quantityInput.value+" efetuado!"
+            var today = new Date();
+            var date = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            conta.sacar(quantityInput.value, date)
+            alertText.innerHTML = "Saque de R$"+quantityInput.value+" efetuado! Horário:"+date
         }catch(e){
             alertText.innerHTML = "<p class='red'>"+e+"</p>"
         }
     }
 }
 realizarDeposito = function(){
-    try{
-        conta.depositar(parseFloat(quantityInput.value))
-        alertText.innerHTML = "Deposito de R$"+quantityInput.value+" efetuado!"
-    }catch(e){
-        alertText.innerHTML = "<p class='red'>"+e+"</p>"
-    }
-    
+    if(quantityInput.value > 0 || quantityInput.value < 0){
+        try{
+            var today = new Date();
+            var date = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            conta.depositar(parseFloat(quantityInput.value), date)
+            alertText.innerHTML = "Deposito de R$"+quantityInput.value+" efetuado! Horário:"+date
+        }catch(e){
+            alertText.innerHTML = "<p class='red'>"+e+"</p>"
+        }
+    }    
 }
 mostrarExtrato = function(){
-    conta.mostrarExtrato()
+    if(isMostrarExtrato == false){
+        extratoTable.style.display = "block"
+        isMostrarExtrato = true;
+        conta.getExtrato()
+        document.getElementById('extrato-button').value = "Esconder extrato"
+    }else{
+        document.getElementById('extrato-button').value = "Mostrar extrato"
+        extratoTable.innerHTML = "";
+        isMostrarExtrato = false;
+    }
 }
 showSaldo = function(){
     if(mostrarSaldo == false){
@@ -115,4 +147,5 @@ showConta = function(){
         else
             contaLabel.innerHTML += nums[i]
     }
+    console.log(conta.extrato)
 }();

@@ -1,5 +1,16 @@
+html{
+    height: 100%;
+}
 body{
-    font-family: 'Comfortaa', cursive;
+    font-family: 'Comfortaa', cursive; 
+    
+}
+.logo-title{
+    text-align: center;
+    margin: 40px 0;
+}
+.logo-img{
+    width: 30%;
 }
 .saque, .red{
     color: red;
@@ -8,5 +19,25 @@ body{
     color: green;
 }
 .saque::before, .deposito::before{
-    content: "R$"
+    content: "R$";
+}
+.deposito-min::before{
+    content: "*";
+    color: #028178;
+}
+#transactions-table{
+    display: none;
+}
+.footer {
+    font-family: Raleway;
+    font-weight: lighter;
+    position: fixed;
+    font-size: 15px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: #262626;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
 }
