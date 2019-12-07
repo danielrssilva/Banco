@@ -1,5 +1,5 @@
 const conta = new ContaPoupanca()//Cria objeto conta do script conta.js
-bol = new Boleto()
+const bol = new Boleto()
 class Interface{
     constructor(){
         this.quantityInput = document.getElementById('value')
