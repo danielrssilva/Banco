@@ -15,22 +15,25 @@
 <body>
     <h1 class="logo-title"><img src="imgs/cyan-bank.svg" alt="Cyan bank" class="logo-img"></h1>
     <section class="container">
-        <h1 class="conta-title">Conta</h1>
-        <p id="numconta"></p>
-        <a id="saldo" onclick="showSaldo()" href="#">Mostrar saldo</a>
-        <p class="input-value"><span class="before-value">R$</span><input type="text" id="value"></p>
-        <p class="deposito-min">Deposito mínimo: R$100,00</p>
-        <input type="button" value="Sacar" id="saque" onclick="realizarSaque();" class="button">
-        <input type="button" value="Depositar" id="depositar" onclick="realizarDeposito();" class="button"><br>
-        <span id="alert"></span>
-        <input type="button" value="Mostrar extrato" id="extrato-button" onclick="mostrarExtrato();" class="button"><br>
-        <div id="transactions-div">
-            <table id="transactions-table"></table>
-        </div>        
+        <section class="content">
+            <h1 class="conta-title">Conta</h1>
+            <p id="numconta"></p>
+            <a id="saldo" onclick="showSaldo()" href="#">Mostrar saldo</a>
+            <p class="input-value"><span class="before-value">R$</span><input type="text" id="value"></p>
+            <p class="deposito-min">Deposito mínimo: R$100,00</p>
+            <input type="button" value="Sacar" id="saque" onclick="realizarSaque();" class="button">
+            <input type="button" value="Depositar" id="depositar" onclick="realizarDeposito();" class="button"><br>
+            <span id="alert"></span>
+            <p><input type="button" value="Mostrar extrato" id="extrato-button" onclick="mostrarExtrato();" class="button"></p> 
+            <div id="transactions-div">
+                <table id="transactions-table"></table>
+            </div>    
+        </section>    
     </section>
     <footer class="footer">
         <p>A product by Hya corp.</p>
     </footer>
 </body>
+<script src="js/conta.js"></script>
 <script src="js/main.js"></script>
 </html>
