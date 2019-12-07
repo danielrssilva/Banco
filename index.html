@@ -18,13 +18,13 @@
         <section class="content">
             <h1 class="conta-title">Conta</h1>
             <p id="numconta"></p>
-            <a id="saldo" onclick="showSaldo()" href="#">Mostrar saldo</a>
+            <p id="saldo" onclick="UInterface.showSaldo()">Mostrar saldo</p>
             <p class="input-value"><span class="before-value">R$</span><input type="text" id="value"></p>
             <p class="deposito-min">Deposito mínimo: R$100,00</p>
-            <input type="button" value="Sacar" id="saque" onclick="realizarSaque();" class="button">
-            <input type="button" value="Depositar" id="depositar" onclick="realizarDeposito();" class="button"><br>
+            <input type="button" value="Sacar" id="saque" onclick="UInterface.realizarSaque();" class="button">
+            <input type="button" value="Depositar" id="depositar" onclick="UInterface.realizarDeposito();" class="button"><br>
             <span id="alert"></span>
-            <p><input type="button" value="Mostrar extrato" id="extrato-button" onclick="mostrarExtrato();" class="button"></p> 
+            <p><input type="button" value="Mostrar extrato" id="extrato-button" onclick="UInterface.mostrarExtrato();" class="button"></p> 
             <div id="transactions-div">
                 <table id="transactions-table"></table>
             </div>    

@@ -4,7 +4,7 @@ class Conta {
         this.saldo = 0
         this.limite = 500
         this.extrato = []
-        this.setContaNum();
+        this.setContaNum()
     }
     setContaNum(){
         for(var i = 0; i<10; i++){
@@ -16,15 +16,12 @@ class Conta {
             throw("Limite insuficiente!")
         else{
             this.saldo -= valor
-            this.showSaldoOnScreen()
             this.extrato.push({
                 type: 'saque',
                 value: valor,
                 date: data
             })
-            if(isMostrarExtrato){
-                this.getExtrato()
-            }
+            return this.getSaldo()
         }
     }
     depositar(valor, data) { 
@@ -32,51 +29,19 @@ class Conta {
             throw("Não dá, bobão!")
         else{
             this.saldo += valor
-            this.showSaldoOnScreen()
             this.extrato.push({
                 type: 'deposito',
                 value: valor,
                 date: data
             })
-            if(isMostrarExtrato){
-                this.getExtrato()
-            }
+            return this.getSaldo()
         }
     }
     getSaldo() {
         return this.saldo;
     }
     getExtrato(){
-        extratoTable.innerHTML = 
-        "<tr>"+
-            "<th>Transação</th>"+
-            "<th>Valor</th>"+
-            "<th>Horário</th>"+
-        "</tr>"
-        if(this.extrato.length != 0){
-            this.extrato.forEach(e =>{
-                extratoTable.innerHTML += 
-                "<tr>"+
-                    "<td class='type'>"+
-                        e.type+
-                    "</td>"+
-                    "<td class='"+e.type+"'>"+
-                        e.value+
-                    "</td>"+
-                    "<td class='time'>"+
-                        e.date+
-                    "</td>"+
-                "</tr>"
-            })
-        }else{
-            extratoTable.innerHTML = 'Não foram encontradas transações'
-        }
-    }
-    showSaldoOnScreen(){
-        if(this.getSaldo() > 0 && mostrarSaldo == true)
-            saldoLabel.innerHTML = "<span class='green'>R$"+this.getSaldo()+"</span>"
-        else if(this.getSaldo() <= 0 && mostrarSaldo == true)
-            saldoLabel.innerHTML = "<span class='red'>R$"+this.getSaldo()+"</span>"
+        return this.extrato
     }
     getNum(){
         return this.numero
