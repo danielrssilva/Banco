@@ -25,7 +25,7 @@ class Conta {
         }
     }
     depositar(valor, data) { 
-        if(valor < 100)
+        if(valor < 50)
             throw("Não dá, bobão!")
         else{
             this.saldo += valor
@@ -33,6 +33,20 @@ class Conta {
                 type: 'deposito',
                 value: valor,
                 date: data
+            })
+            return this.getSaldo()
+        }
+    }
+    pagamentoBoleto(boleto){
+        var valor = boleto.getValor()
+        if(valor > (this.saldo + this.limite))
+            throw("Limite insuficiente!")
+        else{
+            this.saldo -= valor
+            this.extrato.push({
+                type: 'boleto',
+                value: valor,
+                date: boleto.getData()
             })
             return this.getSaldo()
         }

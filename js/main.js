@@ -1,5 +1,5 @@
 const conta = new ContaPoupanca()//Cria objeto conta do script conta.js
-
+bol = new Boleto()
 class Interface{
     constructor(){
         this.quantityInput = document.getElementById('value')
@@ -13,13 +13,12 @@ class Interface{
     }
     realizarSaque(){
         var valor = this.getQuantityInputValue()
-        if(valor > 0 || valor < 0){
+        if((valor > 0 || valor < 0) && valor%10 == 0){
             try{
                 var today = new Date()
                 var timeStamp = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
                 conta.sacar(valor, timeStamp)
                 this.changeTransactionDescription("saque", valor, timeStamp, null)
-                this.setQuantityInputValue('')
                 if(!this.getEsconderExtrato())
                     this.updateExtrato()
                 if(!this.getEsconderSaldo())
@@ -30,16 +29,16 @@ class Interface{
         }else{
             this.changeTransactionDescription(null, null, null, "")
         }
+        this.setQuantityInputValue('')
     }
     realizarDeposito(){
         var valor = this.getQuantityInputValue()
         if(valor > 0 || valor < 0){
             try{
-                var today = new Date();
-                var timeStamp = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var today = new Date()
+                var timeStamp = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
                 conta.depositar(parseFloat(valor), timeStamp)
                 this.changeTransactionDescription("deposito", valor, timeStamp, null)
-                this.setQuantityInputValue('')
                 if(!this.getEsconderExtrato())
                     this.updateExtrato()
                 if(!this.getEsconderSaldo())
@@ -50,6 +49,29 @@ class Interface{
         }else{
             this.changeTransactionDescription(null, null, null, "")
         }    
+        this.setQuantityInputValue('')
+    }
+    pagarBoleto(){
+        var valor = this.getQuantityInputValue()
+        if(valor > 0 || valor < 0){
+            try{
+                var today = new Date()
+                var timeStamp = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
+                bol.setValor(valor)
+                bol.setData(timeStamp)
+                this.setQuantityInputValue('')
+                conta.pagamentoBoleto(bol)
+                if(!this.getEsconderExtrato())
+                    this.updateExtrato()
+                if(!this.getEsconderSaldo())
+                    this.updateSaldo()
+            }catch(e){
+                this.changeTransactionDescription(null, null, null, e)
+            }
+        }else{
+            this.changeTransactionDescription(null, null, null, "")
+        }
+        this.setQuantityInputValue('')
     }
     mostrarExtrato(){
         if(this.getEsconderExtrato() == true){

@@ -15,7 +15,7 @@ body{
 }
 .container{
     margin: 0 auto;
-    padding: 30px 0;
+    padding: 10px;
     border-radius: 20px;
     width: 40%;
     text-align: center;
@@ -25,6 +25,7 @@ body{
     transition: .2s all;
 }
 .content{
+    border-radius: 10px;
     padding: 20px 0;
     background: var(--white);
     transition: .2s all;
@@ -134,7 +135,7 @@ td{
     left: 0;
     bottom: 0;
     width: 100%;
-    background: var(--grey);
+    background: linear-gradient(to right,#028178,#346E7D);
     color: var(--white);
     text-align: center;
     padding: 20px 0;

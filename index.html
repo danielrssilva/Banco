@@ -20,9 +20,10 @@
             <p id="numconta"></p>
             <p id="saldo" onclick="UInterface.showSaldo()">Mostrar saldo</p>
             <p class="input-value"><span class="before-value">R$</span><input type="text" id="value"></p>
-            <p class="deposito-min">Deposito mínimo: R$100,00</p>
+            <p class="deposito-min">Deposito mínimo: R$50,00</p>
             <input type="button" value="Sacar" id="saque" onclick="UInterface.realizarSaque();" class="button">
-            <input type="button" value="Depositar" id="depositar" onclick="UInterface.realizarDeposito();" class="button"><br>
+            <input type="button" value="Depositar" id="depositar" onclick="UInterface.realizarDeposito();" class="button">
+            <input type="button" value="Pagar boleto" id="boleto" onclick="UInterface.pagarBoleto();" class="button"><br>
             <span id="alert"></span>
             <p><input type="button" value="Mostrar extrato" id="extrato-button" onclick="UInterface.mostrarExtrato();" class="button"></p> 
             <div id="transactions-div">
@@ -34,6 +35,7 @@
         <p>A product by Hya corp.</p>
     </footer>
 </body>
+<script src="js/boleto.js"></script>
 <script src="js/conta.js"></script>
 <script src="js/main.js"></script>
 </html>
